@@ -1,7 +1,8 @@
 # Classic-Deep-Learning-with-Tensorflow-Eager-Execution
 Classical deep learning paper implementation using tensorflow's eager execution
 
-## Library version
+## Version specification
+- ubunut 16.04
 - Tensorflow with version 1.8.0
 - CUDA 9.0 & CUDNN 7.1
 
