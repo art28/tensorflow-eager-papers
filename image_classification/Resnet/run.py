@@ -28,10 +28,11 @@ def main():
     resnet_model = Resnet(learning_rate=args.lr, device_name=device)
     # resnet_model.load()  # you can load the latest model you saved
     if args.no_tqdm:
-        tqdm_option=None
+        tqdm_option = None
     else:
-        tqdm_option="normal"
-    resnet_model.fit(X_train, y_train, X_test, y_test, epochs=args.epochs, verbose=args.verbose, batch_size=args.batch_size, tqdm_option=tqdm_option)
+        tqdm_option = "normal"
+    resnet_model.fit(X_train, y_train, X_test, y_test, epochs=args.epochs, verbose=args.verbose,
+                     batch_size=args.batch_size, saving=args.saving, tqdm_option=tqdm_option)
 
 
 if __name__ == "__main__":
