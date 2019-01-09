@@ -11,12 +11,12 @@ tf.enable_eager_execution(device_policy=tfe.DEVICE_PLACEMENT_SILENT)
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", help="cifar data path", default="../data/cifar-10-batches-py")
-    parser.add_argument("--epochs", type=int, help="number of learning epoch", default=10)
+    parser.add_argument("--epochs", type=int, help="number of learning epoch, default is 10", default=10)
     parser.add_argument("--saving", help="wheter saving or not(each verbose iteration)", action="store_true")
     parser.add_argument("--batch_size", type=int, help="batch size(default is 32)", default=32)
-    parser.add_argument("--verbose", type=int, help="verbosity cycle(default is 10 epoch)", default=1)
+    parser.add_argument("--verbose", type=int, help="verbosity cycle(default is 1 epoch)", default=1)
     parser.add_argument("--no_tqdm", help="whether to use tqdm process bar", action="store_true")
-    parser.add_argument("--lr", type=float, help="learning rate", default=1e-3)
+    parser.add_argument("--lr", type=float, help="learning rate, default is 0.001", default=1e-3)
 
     args = parser.parse_args()
     dirname = args.data
