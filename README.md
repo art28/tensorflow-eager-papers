@@ -3,6 +3,7 @@ Classical deep learning paper implementation using tensorflow's eager execution
 
 ## Version specification
 - ubunut 16.04
+- python 3.67
 - Tensorflow with version 1.8.0
 - CUDA 9.0 & CUDNN 7.1
 
