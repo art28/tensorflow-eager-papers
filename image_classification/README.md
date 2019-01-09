@@ -9,7 +9,7 @@ Image Classification models used in [ILSVRC](http://www.image-net.org/challenges
 
 ## Python Requirements
 - if you want to use tensorflow-gpu,
-- run `pip install -r requirements.txt`
+- run `pip install -r requirements-gpu.txt`
 - else,
 - run `pip install -r requirements.txt`
 
