@@ -7,6 +7,12 @@ Image Classification models used in [ILSVRC](http://www.image-net.org/challenges
 - but, I tried to maintain main chracateristics.
 - to download, run `python download_cifar.py`
 
+## Python Requirements
+- if you want to use tensorflow-gpu,
+- run `pip install -r requirements.txt`
+- else,
+- run `pip install -r requirements.txt`
+
 ## Categories
  - [x] [Alexnet](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)
  - [x] [VGGNet](https://arxiv.org/pdf/1409.1556.pdf)
