@@ -24,7 +24,7 @@ class InceptionBlock(tf.keras.Model):
         self.maxpool = tf.layers.MaxPooling2D((3,3), (1,1), padding="same")
         self.convpool = tf.layers.Conv2D(convpool, (1,1), (1,1), padding="same" , activation=tf.nn.relu)
 
-    def __call__(self, X, *args, **kwargs):
+    def call(self, X, *args, **kwargs):
         x11 = self.conv11(X)
 
         x33 = self.reduce_conv33(X)

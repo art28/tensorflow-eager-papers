@@ -103,6 +103,9 @@ class Alexnet(tf.keras.Model):
 
         return x
 
+    def call(self, X, training):
+        return self.predict(X, training)
+
     def loss(self, X, y, training):
         """calculate loss of the batch
         Args:
@@ -180,6 +183,7 @@ class Alexnet(tf.keras.Model):
                     if saving:
                         self.save()
                     print("=" * 25 + Style.RESET_ALL)
+                time.sleep(1)
 
     def save(self):
         tfe.Saver(self.variables).save(self.checkpoint_directory, global_step=self.global_step)
@@ -187,7 +191,7 @@ class Alexnet(tf.keras.Model):
 
     def load(self, global_step="latest"):
         dummy_input = tf.constant(tf.zeros((1,) + self.input_dim))
-        dummy_pred = self.predict(dummy_input, False)
+        dummy_pred = self.call(dummy_input, True)
 
         saver = tfe.Saver(self.variables)
         if global_step == "latest":

@@ -3,6 +3,7 @@ import tensorflow.contrib.eager as tfe
 import os
 from blocks_resnet import IdentitiyBlock_3, ConvolutionBlock_3
 from tqdm import tqdm, tqdm_notebook
+import time
 from colorama import Fore, Style
 
 
@@ -97,6 +98,9 @@ class Resnet(tf.keras.Model):
 
         return x
 
+    def call(self, X, training):
+        return self.predict(X, training)
+
     def loss(self, X, y, training):
         """calculate loss of the batch
         Args:
@@ -181,7 +185,7 @@ class Resnet(tf.keras.Model):
 
     def load(self, global_step="latest"):
         dummy_input = tf.constant(tf.zeros((1,) + self.input_dim))
-        dummy_pred = self.predict(dummy_input, False)
+        dummy_pred = self.call(dummy_input, True)
 
         saver = tfe.Saver(self.variables)
         if global_step == "latest":

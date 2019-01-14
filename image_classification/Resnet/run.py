@@ -26,7 +26,10 @@ def main():
 
     device = 'gpu:0' if tfe.num_gpus() > 0 else 'cpu:0'
     resnet_model = Resnet(learning_rate=args.lr, device_name=device)
+    resnet_model(tf.convert_to_tensor(X_train[:1]), True)
+    resnet_model.summary()
     # resnet_model.load()  # you can load the latest model you saved
+
     if args.no_tqdm:
         tqdm_option = None
     else:

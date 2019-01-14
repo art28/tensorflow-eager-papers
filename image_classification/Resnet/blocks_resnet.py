@@ -24,7 +24,7 @@ class IdentitiyBlock_3(tf.keras.Model):
         self.conv3 = tf.layers.Conv2D(filters[2], kernel_sizes[2], padding="same", activation=tf.nn.relu)
         self.bn3 = tf.layers.BatchNormalization()
 
-    def __call__(self, X, training=False):
+    def call(self, X, training=False):
         x = self.conv1(X)
         x = self.bn1(x, training=training)
 
@@ -64,7 +64,7 @@ class ConvolutionBlock_3(tf.keras.Model):
                                          activation=tf.nn.relu)
         self.shortcut_bn = tf.layers.BatchNormalization()
 
-    def __call__(self, X, training=False):
+    def call(self, X, training=False):
         x = self.conv1(X)
         x = self.bn1(x, training=training)
 
