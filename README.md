@@ -1,5 +1,6 @@
 # Tensorflow-eager-papers
 Classical deep learning paper implementation using tensorflow's eager execution
+- originally was [art28/Classic-Deep-Learning-with-Tensorflow-Eager-Execution](https://github.com/art28/Classic-Deep-Learning-with-Tensorflow-Eager-Execution)
 
 ## Version specification
 - ubunut 16.04
