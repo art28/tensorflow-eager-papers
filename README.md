@@ -1,4 +1,4 @@
-# Classic-Deep-Learning-with-Tensorflow-Eager-Execution
+# Tensorflow-eager-papers
 Classical deep learning paper implementation using tensorflow's eager execution
 
 ## Version specification
