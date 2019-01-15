@@ -1,0 +1,9 @@
+tensorflow-gpu
+tqdm
+colorama
+googledrivedownloader
+gensim
+nltk
+numpy
+matplotlib
+seaborn
