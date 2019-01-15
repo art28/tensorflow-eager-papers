@@ -376,13 +376,13 @@ class DRAW(tf.keras.Model):
 
                 if i == 0 or ((i + 1) % verbose == 0):
                     print(Fore.RED + "=" * 25)
-                    print("[EPOCH %d / STEP %d]" % ((i + 1), self.global_step))
+                    print("[EPOCH %d / STEP %d] TRAIN" % ((i + 1), self.global_step))
                     print("TRAIN loss   : %.4f" % (epoch_loss / batchlen_train))
                     print("RECON loss   : %.4f" % (epoch_reconstruction_loss / batchlen_train))
                     print("KL    loss   : %.4f" % (epoch_KL_loss / batchlen_train))
                     print("=" * 25 + Style.RESET_ALL)
                     print(Fore.BLUE + "=" * 25)
-                    print("[EPOCH %d / STEP %d]" % ((i + 1), self.global_step))
+                    print("[EPOCH %d / STEP %d] VAL  " % ((i + 1), self.global_step))
                     print("TRAIN loss   : %.4f" % (epoch_loss_val / batchlen_val))
                     print("RECON loss   : %.4f" % (epoch_reconstruction_loss_val / batchlen_val))
                     print("KL    loss   : %.4f" % (epoch_KL_loss_val / batchlen_val))
