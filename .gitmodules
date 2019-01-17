@@ -1,0 +1,3 @@
+[submodule "NLP/Transformer/dataset"]
+	path = NLP/Transformer/dataset
+	url = https://github.com/jungyeul/korean-parallel-corpora
