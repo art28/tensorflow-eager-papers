@@ -17,6 +17,6 @@ Classical deep learning paper implementation using tensorflow's eager execution
  - [x] Image Classification
  - [ ] Speech Recognition
  - [ ] Reinforcement Learning
- - [ ] Natural Language Processing
+ - [x] Natural Language Processing
  - [x] Generative Models
- - [x] Neural Turing Machine
+ - [ ] Neural Turing Machine
