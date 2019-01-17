@@ -52,7 +52,7 @@ class LayerNormalization(tf.keras.Model):
         return norm_x * self.scale + self.bias
 
 
-# most of the code is referenced by
+# modified from
 # https://github.com/tensorflow/models/blob/master/official/transformer/model/attention_layer.py
 class MultiHeadAttention(tf.keras.Model):
     def __init__(self, hidden_size, num_heads, name):
