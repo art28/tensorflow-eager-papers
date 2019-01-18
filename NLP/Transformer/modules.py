@@ -30,18 +30,17 @@ def get_position_encoding(
 
 
 # https://github.com/tensorflow/models/blob/master/official/transformer/model/transformer.py
-class LayerNormalization(tf.keras.Model):
+class LayerNormalization(tf.keras.layers.Layer):
     """Applies layer normalization."""
 
-    def __init__(self, hidden_size, namespace):
-        super(LayerNormalization, self).__init__()
+    def __init__(self, hidden_size, name):
+        super(LayerNormalization, self).__init__(name=name)
         self.hidden_size = hidden_size
-        self.namespace = namespace
 
     def build(self, _):
-        self.scale = tf.get_variable("layer_norm_scale_%s" % self.namespace, [self.hidden_size],
+        self.scale = self.add_variable("layer_norm_scale", [self.hidden_size],
                                      initializer=tf.ones_initializer())
-        self.bias = tf.get_variable("layer_norm_bias_%s" % self.namespace, [self.hidden_size],
+        self.bias = self.add_variable("layer_norm_bias", [self.hidden_size],
                                     initializer=tf.zeros_initializer())
         self.built = True
 
@@ -171,7 +170,7 @@ class PrePostProcessingWrapper(tf.keras.Model):
         self.hidden_size = hidden_size
 
         # Create normalization layer
-        self.layer_norm = LayerNormalization(self.hidden_size, namespace=name)
+        self.layer_norm = LayerNormalization(self.hidden_size, name="layer_normalization")
 
     def call(self, x, *args, **kwargs):
         """Return Layer-normalized + Drop-out + Residual Processing
