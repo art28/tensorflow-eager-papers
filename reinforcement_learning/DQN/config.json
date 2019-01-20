@@ -1,0 +1,12 @@
+{
+    "Fx":84,
+    "Fy":84,
+    "features":4,
+    "memory_size": 100000,
+    "epsilon_initial": 1.0,
+    "epsilon_final" :0.1,
+    "exploration_step": 50000,
+    "epsilon_step": 1000000,
+    "gamma": 0.99,
+    "skip_frame": 4
+}
