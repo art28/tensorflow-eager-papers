@@ -3,3 +3,4 @@ tqdm
 colorama
 gym
 gym[atari]
+opencv-python
