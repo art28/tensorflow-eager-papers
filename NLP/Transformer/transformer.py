@@ -146,8 +146,6 @@ class Transformer(tf.keras.Model):
             batch_size : training batch size
             saving: whether to save checkpoint or not
             tqdm_option: tqdm logger option. default is none. use "normal" for tqdm, "notebook" for tqdm_notebook
-        Returns:
-            beams with highest probability.
         """
 
         def tqdm_wrapper(*args, **kwargs):
@@ -199,6 +197,8 @@ class Transformer(tf.keras.Model):
             start_token : initial target sentence with only <BOS> token
             eos_index : index of <EOS> token in target vocabulary
             beam_cnt : beam-search option , if 1 it is same as greedy search
+        Returns:
+            beams with highest probability.
         """
         def end_condition(beamlist, last):
             for beam_ in beamlist:
