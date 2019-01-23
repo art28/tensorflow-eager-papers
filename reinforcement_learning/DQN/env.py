@@ -194,7 +194,7 @@ class Environment:
                 if saving:
                     self.save()
 
-    def simulate(self, episode, max_step=10000000, render=False):
+    def simulate(self, episode, max_step=1000, render=False):
         """Run the game with existing dqn network
         Args:
             episode : number of train episodes
