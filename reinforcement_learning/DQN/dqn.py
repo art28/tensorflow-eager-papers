@@ -128,7 +128,7 @@ class DQN(tf.keras.Model):
         q_wrapped = self.q_target(X_next)
         max_q_wrapped = tf.reduce_max(q_wrapped, axis=1)
         expected_next_return = max_q_wrapped * done_0
-        y = r + expected_next_return
+        y = r + self.gamma * expected_next_return
 
         # calculate active q-value
         q_active = self.q_active(X)
