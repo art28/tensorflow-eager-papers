@@ -4,6 +4,9 @@
 Korean-English parrel corpora
 (https://github.com/jungyeul/korean-parallel-corpora)
 
+## Run script
+### use ipynb notebook(`run.ipynb`)
+
 ## References
 - [Kyubyong/transformer](https://github.com/Kyubyong/transformer)
 - [tensorflow/tensor2tensor](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/models/transformer.py)

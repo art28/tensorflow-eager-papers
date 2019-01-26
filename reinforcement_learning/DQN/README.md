@@ -6,5 +6,8 @@ Atari-game
 install command:
 ```pip install 'gym[atari]'```
 
+## Run script
+### use ipynb notebook(`run.ipynb`)
+
 ## References
 - [devsisters/DQN-tensorflow](https://github.com/devsisters/DQN-tensorflow)

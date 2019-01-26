@@ -3,6 +3,9 @@
 - [MNIST](http://yann.lecun.com/exdb/mnist/)
 - generate handwriting
 
+## Run script
+### use ipynb notebook(`run.ipynb`)
+
 ## References
 - [ericjang/draw](https://github.com/ericjang/draw/blob/master/draw.py)
 - [ikostrikov/TensorFlow-VAE-GAN-DRAW](https://github.com/ikostrikov/TensorFlow-VAE-GAN-DRAW)

@@ -4,4 +4,7 @@
 - [MR](https://www.kaggle.com/nltkdata/movie-review)
 - movie review with sentiment labels
 
+## Run script
+### use ipynb notebook(`char_cnn.ipynb`)
+
 ## References
