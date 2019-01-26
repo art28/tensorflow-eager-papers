@@ -4,7 +4,7 @@ import numpy as np
 from collections import deque
 import random
 from colorama import Fore, Style
-from dqn import DQN
+from dqn import ActiveTargetDQN
 from tqdm import tqdm, tqdm_notebook, trange
 from preprocess import preprocess
 
@@ -21,12 +21,11 @@ class Environment:
             exploration_step : number of steps for pure exploration
             epsilon_step : number of steps for epsilon decrease
             gamma : discount rate
-            skip_frame : number of steps which automatically use past action
         device_name : name of device(normally cpu:0 or gpu:0)
     """
     def __init__(self, params, device_name):
-        self.env = gym.make('Breakout-v0')
-        self.dqn = DQN(input_dim=(params["Fx"], params["Fy"], params["features"]),
+        self.env = gym.make('BreakoutDeterministic-v0')
+        self.dqn = ActiveTargetDQN(input_dim=(params["Fx"], params["Fy"], params["features"]),
                        num_action=self.env.action_space.n,
                        memory_size=params["memory_size"], gamma=params["gamma"], device_name=device_name
                        )
@@ -42,7 +41,6 @@ class Environment:
         self.epsilon_decay_rate = (self.epsilon_final - self.epsilon) / self.epsilon_step
 
         self.features = params['features']
-        self.skip_frame = params['skip_frame']
         self.exploration_step = params['exploration_step']
         self.decay_step = params['exploration_step'] + params['epsilon_step']
 
@@ -82,6 +80,7 @@ class Environment:
             saving: whether to save checkpoint or not
         """
         episode_return = []
+        verbose_return = []
         for i_episode in trange(episode):
             return_episode = 0
             observation = self.preprocess(self.env.reset())
@@ -89,7 +88,6 @@ class Environment:
             for _ in range(self.features):
                 inputs.append(observation)
 
-            action_now = -1
             life_now = initial_life
 
             for t in range(max_step):
@@ -117,7 +115,7 @@ class Environment:
                                                    done
                                                    ))
                 # epsilon greedy
-                elif t % self.skip_frame == 0:
+                else:
                     X = np.transpose(np.array(inputs), [1, 2, 0])
                     if random.random() < self.epsilon:
                         action_now = self.env.action_space.sample()
@@ -147,33 +145,11 @@ class Environment:
                     if self.epsilon > self.epsilon_final:
                         self.epsilon += self.epsilon_decay_rate
 
-                # skip frame
-                else:
-                    observation, reward, done, info = self.env.step(action_now)
-                    return_episode += reward
-
-                    if info['ale.lives'] < life_now:
-                        reward -= 1
-                        life_now = info['ale.lives']
-
-                    X = np.transpose(np.array(inputs), [1, 2, 0])
-                    inputs.append(self.preprocess(observation))
-                    X_next = np.transpose(np.array(inputs), [1, 2, 0])
-                    self.dqn.replay_memory.append((X,
-                                                   action_now,
-                                                   reward,
-                                                   X_next,
-                                                   int(done)
-                                                   ))
-
-                    # epsilon decay
-                    if self.epsilon > self.epsilon_final:
-                        self.epsilon += self.epsilon_decay_rate
-
                 if done:
                     break
 
             episode_return.append(return_episode)
+            verbose_return.append(return_episode)
             self.dqn.copy_active2target()
 
             if i_episode == 0 or ((i_episode + 1) % verbose == 0):
@@ -186,13 +162,14 @@ class Environment:
                 # print(Fore.BLACK + "=" * 50)
                 print(Fore.RED + "[EPISODE %3d / STEP %5d] - %s" % (i_episode + 1, self.i_step, stage_tooltip))
                 print(Fore.GREEN + "Learned Step : %4d" % (self.dqn.global_step))
-                print(Fore.BLUE + "AVG   Return : %.4f" % (sum(episode_return) / len(episode_return)))
-                print(Fore.BLUE + "MAX   Return : %.4f" % (max(episode_return)))
-                episode_return = list()
+                print(Fore.BLUE + "AVG   Return : %.4f" % (sum(verbose_return) / len(verbose_return)))
+                print(Fore.BLUE + "MAX   Return : %.4f" % (max(verbose_return)))
+                verbose_return = list()
                 # print(Fore.BLACK + "=" * 50 + Style.RESET_ALL)
 
                 if saving:
                     self.save()
+        return episode_return
 
     def simulate(self, episode, max_step=1000, render=False):
         """Run the game with existing dqn network
@@ -221,7 +198,7 @@ class Environment:
 
                 inputs.append(self.preprocess(observation))
 
-                if done:
+                if done or (t == max_step-1):
                     print(Fore.GREEN + "EPISODE %3d: REWARD: %s" % (i_episode, return_episode))
                     returns.append(return_episode)
                     break
