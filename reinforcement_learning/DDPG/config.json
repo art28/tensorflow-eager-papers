@@ -1,0 +1,7 @@
+{
+  "memory_size": 100000,
+  "gamma": 0.99,
+  "tau": 1e-3,
+  "lr_actor": 1e-4,
+  "lr_critic": 1e-3
+}
